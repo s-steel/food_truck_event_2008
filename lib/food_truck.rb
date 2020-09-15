@@ -6,11 +6,18 @@ class FoodTruck
   end
 
   def stock(item, amount)
-    @inventory[item] = amount
+    start = 0
+    @inventory[item] = (start += amount)
   end
 
   def check_stock(item)
-
+    if @inventory.key?(item)
+      the_item = @inventory.find do |name, price|
+        name == item
+      end[1]
+    else
+      0
+    end
   end
 
 end
