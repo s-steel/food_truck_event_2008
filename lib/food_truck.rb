@@ -1,23 +1,23 @@
+require 'pry'
+
 class FoodTruck
   attr_reader :name, :inventory
   def initialize(name)
     @name = name
-    @inventory = Hash.new
+    @inventory = Hash.new(0)
   end
 
   def stock(item, amount)
-    start = 0
-    @inventory[item] = (start += amount)
+    @inventory[item] += amount
   end
 
   def check_stock(item)
-    if @inventory.key?(item)
-      the_item = @inventory.find do |name, price|
-        name == item
-      end[1]
-    else
-      0
-    end
+    @inventory[item]
   end
 
+  def potential_revenue
+    @inventory.sum do |item|
+      item[0].price * item[1]
+    end
+  end
 end
